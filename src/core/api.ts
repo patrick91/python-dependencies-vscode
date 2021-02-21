@@ -1,33 +1,38 @@
 import { getCache } from "../cache";
-import { fetchLatestVersion } from "./pypi";
+import { fetchLibrary } from "./pypi";
 
 const ONE_HOUR = 60 * 60 * 1000;
+const CACHE_PREFIX = "v1";
 
-export const getVersion = async (library: string) => {
+const getCacheKey = (library: string) => `${CACHE_PREFIX}-${library}`;
+
+export const getInfo = async (
+    library: string,
+): Promise<{ version: string; summary: string }> => {
     const cache = getCache();
+    const key = getCacheKey(library);
 
-    const info = cache.get(library, null);
+    let info = cache.get(key, null);
 
     if (info) {
-        const { version, date } = JSON.parse(info);
-        const parsedDate = new Date(date);
+        const data = JSON.parse(info);
+        const parsedDate = new Date(data.date);
 
         if (new Date().getTime() - parsedDate.getTime() < ONE_HOUR) {
-            console.log("Not fetching new value for", library);
+            console.info("Not fetching new value for", library);
 
-            return version;
+            return data.info;
         }
     }
 
-    const version = await fetchLatestVersion(library);
+    const data = await fetchLibrary(library);
 
-    await cache.put(
-        library,
-        JSON.stringify({
-            version,
-            date: new Date(),
-        }),
-    );
+    info = {
+        version: data.info.version as string,
+        summary: data.info.summary as string,
+    };
 
-    return version;
+    await cache.put(key, JSON.stringify({ info, date: new Date() }));
+
+    return info;
 };

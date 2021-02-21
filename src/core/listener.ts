@@ -2,7 +2,7 @@ import { TextEditor, window, TextEditorDecorationType } from "vscode";
 import { Dependency } from "../types";
 import { findDependencies } from "../utils/parsing";
 import { getInstalledVersions } from "./poetry";
-import { getVersion } from "./api";
+import { getInfo } from "./api";
 import { getDecoration } from "./decorations";
 import { dirname } from "path";
 
@@ -14,10 +14,11 @@ const updateVersions = (
 ) => {
     return Promise.all(
         deps.map(async (dep) => {
-            const version = await getVersion(dep.name);
+            const info = await getInfo(dep.name);
 
             dep.version.installed = installedVersions[dep.name];
-            dep.version.latest = version;
+            dep.version.latest = info.version;
+            dep.summary = info.summary;
         }),
     );
 };

@@ -5,6 +5,7 @@ export type Dependency = {
         installed?: string;
         latest?: string;
     };
+    summary?: string;
     line: number;
     rawText: string;
 };

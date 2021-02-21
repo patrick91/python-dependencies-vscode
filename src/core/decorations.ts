@@ -2,12 +2,9 @@ import { MarkdownString, Position, Range, ThemeColor } from "vscode";
 import { Dependency } from "../types";
 
 export const getDecoration = (dep: Dependency) => {
-    const message = new MarkdownString(
-        `**this is a new update lololol**`,
-        true,
-    );
+    const message = new MarkdownString(`**${dep.name}**`, true);
     message.appendText("\n");
-    message.appendMarkdown("$(globe)");
+    message.appendMarkdown(dep.summary || "No information for this library");
     message.isTrusted = true;
 
     const prefix = dep.version.latest === dep.version.installed ? "✅" : "⚠️";
