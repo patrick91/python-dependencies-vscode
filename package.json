@@ -1,29 +1,24 @@
 {
-    "name": "poetry-python",
-    "displayName": "Poetry Python",
-    "description": "Utilities for Poetry",
-    "version": "0.0.11",
+    "name": "python-dependencies-vscode",
+    "displayName": "Python Dependencies",
+    "description": "Utilities for managing Python dependencies",
+    "version": "0.0.15",
     "publisher": "patrick91",
     "engines": {
         "vscode": "^1.53.0"
     },
+    "repository": {
+        "url": "https://github.com/patrick91/python-dependencies-vscode"
+    },
     "categories": [
-        "Other"
+        "Other",
+        "Programming Languages"
     ],
     "activationEvents": [
-        "onCommand:poetry-python.helloWorld",
         "onLanguage:toml",
         "workspaceContains:pyproject.toml"
     ],
     "main": "./out/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "poetry-python.helloWorld",
-                "title": "Hello World"
-            }
-        ]
-    },
     "scripts": {
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
