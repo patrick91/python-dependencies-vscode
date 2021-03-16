@@ -7,7 +7,7 @@ export const getDecoration = (dep: Dependency) => {
     message.appendMarkdown(dep.summary || "No information for this library");
     message.isTrusted = true;
 
-    const prefix = dep.version.latest === dep.version.installed ? "✅" : "⚠️";
+    const prefix = dep.version.latest === dep.version.installed ? "✅" : "🚸";
 
     return {
         range: new Range(

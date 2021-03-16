@@ -1,5 +1,5 @@
-import { Dependency } from "../types";
-import { splitFirst } from "./strings";
+import { Dependency } from "../../types";
+import { splitFirst } from "../strings";
 
 const parseInfo = (str: string) => {
     // TODO: this is a naive way of parsing this string, but for now it works, probably

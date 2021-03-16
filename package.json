@@ -16,7 +16,11 @@
     ],
     "activationEvents": [
         "onLanguage:toml",
-        "workspaceContains:pyproject.toml"
+        "onLanguage:txt",
+        "onLanguage:in",
+        "workspaceContains:pyproject.toml",
+        "workspaceContains:requirements.txt",
+        "workspaceContains:requirements.in"
     ],
     "main": "./out/extension.js",
     "scripts": {
