@@ -1,3 +1,4 @@
+import { normalize } from "../../core/normalize";
 import { Dependency } from "../../types";
 import { splitFirst } from "../strings";
 
@@ -26,7 +27,7 @@ const parseDependency = (line: string, lineNumber: number) => {
         : JSON.parse(info);
 
     return {
-        name,
+        name: normalize(name),
         version: {
             toml: version,
         },
