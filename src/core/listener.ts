@@ -17,6 +17,10 @@ const updateVersions = (
         deps.map(async (dep) => {
             const info = await getInfo(dep.name);
 
+            if (!info) {
+                return;
+            }
+
             dep.version.installed = installedVersions[dep.name];
             dep.version.latest = info.version;
             dep.summary = info.summary;

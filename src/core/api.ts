@@ -8,7 +8,7 @@ const getCacheKey = (library: string) => `${CACHE_PREFIX}-${library}`;
 
 export const getInfo = async (
     library: string,
-): Promise<{ version: string; summary: string }> => {
+): Promise<{ version: string; summary: string } | null> => {
     const cache = getCache();
     const key = getCacheKey(library);
 
@@ -27,12 +27,16 @@ export const getInfo = async (
 
     const data = await fetchLibrary(library);
 
-    info = {
-        version: data.info.version as string,
-        summary: data.info.summary as string,
-    };
+    if (data) {
+        info = {
+            version: data.info.version as string,
+            summary: data.info.summary as string,
+        };
 
-    await cache.put(key, JSON.stringify({ info, date: new Date() }));
+        await cache.put(key, JSON.stringify({ info, date: new Date() }));
 
-    return info;
+        return info;
+    }
+
+    return null;
 };
