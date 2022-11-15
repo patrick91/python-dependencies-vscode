@@ -2,7 +2,7 @@
     "name": "python-dependencies-vscode",
     "displayName": "Python Dependencies",
     "description": "Utilities for managing Python dependencies",
-    "version": "0.0.17",
+    "version": "0.0.18",
     "publisher": "patrick91",
     "engines": {
         "vscode": "^1.53.0"
@@ -48,6 +48,7 @@
     "dependencies": {
         "execa": "^5.0.0",
         "node-fetch": "^2.6.1",
-        "vscode-cache": "^0.3.0"
+        "vscode-cache": "^0.3.0",
+        "vscode-jsonrpc": "^8.0.2"
     }
 }

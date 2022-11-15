@@ -1,15 +1,11 @@
 import * as execa from "execa";
-import { workspace } from "vscode";
+import { getInterpreterDetails } from "../common/python";
 import { normalize } from "./normalize";
 
 export const getInstalledVersions = async (path: string) => {
-    let command = "pip list";
-
-    const { pythonPath } = workspace.getConfiguration("python");
-
-    if (pythonPath) {
-        command = path + "/" + pythonPath.replace(/python$/, "") + command;
-    }
+    const data = await getInterpreterDetails();
+    const pythonPath = data?.path ? data.path[0] : "python";
+    const command = pythonPath + " -m pip list";
 
     const { stdout } = await execa.command(command, {
         cwd: path,
