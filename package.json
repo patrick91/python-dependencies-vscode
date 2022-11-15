@@ -48,6 +48,7 @@
     },
     "dependencies": {
         "execa": "^5.0.0",
+        "fs-extra": "^10.1.0",
         "node-fetch": "^2.6.1",
         "vscode-cache": "^0.3.0",
         "vscode-jsonrpc": "^8.0.2"
