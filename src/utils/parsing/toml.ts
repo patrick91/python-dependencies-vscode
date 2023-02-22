@@ -51,11 +51,9 @@ export const findDependencies = (text: string) => {
         if (line.startsWith("[")) {
             lastSection = line.replace(/^\[/, "").replace(/\]$/, "");
         } else {
+            const poetryDependenciesRe = new RegExp("^tool\.poetry\..*dependencies$")
             if (
-                [
-                    "tool.poetry.dependencies",
-                    "tool.poetry.dev-dependencies",
-                ].includes(lastSection)
+                poetryDependenciesRe.test(lastSection)
             ) {
                 const dep = parseDependency(line, index);
 
